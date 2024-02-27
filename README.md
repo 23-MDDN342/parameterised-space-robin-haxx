@@ -2,7 +2,7 @@ openProcessing code notes:
 
 ![bowhowz](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/bowhowz.png?raw=true)\
 -RobA / @cartocopia , "Bowhowz"\
-https://openprocessing.org/sketch/2165806\
+https://openprocessing.org/sketch/2165806 \
 Progressively built up composition
 
 strategy for colour: nested palette arrays
@@ -19,7 +19,7 @@ interestingly enough. this had 5 cases for elements being "deployed".
 
 ![growing into it](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/growingIntoIt.png?raw=true)\
 A. Reuland / @a_soluble_fish , "growing into it"\
-https://openprocessing.org/sketch/2169799\
+https://openprocessing.org/sketch/2169799 \
 mycelium/ branches colonizing space
 
 -this code was object-oriented; using classes for different elements.
