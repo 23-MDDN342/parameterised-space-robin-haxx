@@ -1,17 +1,43 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/DlFCTo_q)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=14046814&assignment_repo_type=AssignmentRepo)
-### 2024 MDDN342 Project 1: Parameterised Space
-EXAMPLE README 
-Update this! 
+openProcessing code notes:
 
-This design is inspired by fireworks and flowers. I want it to be full of changes, so that every frame can have a fresh feeling.
 
-In terms of concrete performance, I draw different geometric figures, let them spread out, and overlay their number at the same time, through the time difference to make the whole dynamic background become enthusiastic.
 
-In terms of color, I made different shapes correspond to different colors, and changed the parameters so that they were different every time they appeared, so that there would be differences between different loops.
+-RobA / @cartocopia , "Bowhowz"
+https://openprocessing.org/sketch/2165806
+Progressively built up composition
 
-In the initial design, I only added the circle. Through the color change of the circle and the superposition of the movement track, although it has a good effect, I think it is too monotonous.
+strategy for colour: nested palette arrays
 
-In the later stages, I added a lot of geometric shapes, which made the color and pattern more variable.
+const pallettes = [
+    [hex1_1, hex1_2, hex1_3],
+    [hex2_1, hex2_2, hex2_3],
+    [hex3_1, hex3_2, hex3_3],
+]
 
-here's a change -robbie
+-"stage counter" for progressively adding visual elements to the composition. 
+-this person used a switch statement, which broke it up pretty well,
+interestingly enough. this had 5 cases for elements being "deployed".
+
+A. Reuland / @a_soluble_fish , "growing into it"
+https://openprocessing.org/sketch/2169799
+mycelium/ branches colonizing space
+
+-this code was object-oriented; using classes for different elements.
+i will do this too :-)
+-a function for growing, similarly to how I have used recursion before.
+-I like how this used the space in a "tiled" format, while implementing
+systems for moving parts that interacted to make a varied overall piece.
+
+requirements:
+-consistent rendering at any resolution (scalable) and lends 
+ itself to large-format application
+-perfect 24 frame loop and smooth, bug-free performance
+-organised, readable and accessible code standard
+ & curated collection of commits. 
+-varied use of coded elements and design patterns, creative 
+ thought process and execution. unique voice.
+-this document tracks my thought process at every significant step
+ and should be able to introduce the work well to a lay-person.
+-open source ethics, always.
+
+-large format viewing
