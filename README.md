@@ -14,8 +14,7 @@ I'm going to work with a maximum of one colour as a starting point and exapand t
 inspiration (music + space)
 
 ![The ARK](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/theArk.png?raw=true)\
-ANTIVIJ, "THE ARK", Mexico\ 
- 
+ANTIVIJ, "THE ARK", Mexico \
 https://cdm.link/2014/02/wander-a-garden-of-light-shape-and-sound-with-antivjs-the-ark-2/ \
 This is a really fantastic combination of what I'd like to be able to apply these visuals to. Sculptural architecture pavilion in an outdoor environment that uses ambient sound as well as its contect in a botanical garden to build an incredibly immersive spectacle. The lighting is very restrained and considered, white-on-black. I want to do something similar with a limited or monochrome palette. Nice mix of mechanical and organic-feeling motion builds on this vibe, and the form of the surface it is projected on is part of the composition through and through.
 
