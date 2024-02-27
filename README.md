@@ -28,7 +28,7 @@ Karma Fields, "Sweat", visuals by Raven Kwok https://ravenkwok.com/ \
 https://www.youtube.com/watch?v=8eohNsFWCLU \
 Another interesting use of music visualization, this came to mind as it breaks up in a rule similar to the golden ratio and alternates between 2d and 3d compositions. I've cited Raven's work before. This was generated with Processing.
 
-This piece is also known as "189D0", and Raven has adapted it for 23 screens of various sizes in a mall interior. 
+This piece is also known as "189D0", and Raven has adapted it for 23 screens of various sizes in a mall interior. \
 ![Raven Kwok #2](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/ravenKwok2.png?raw=true)\
 https://ravenkwok.com/189d0-special-edition-cosmo/
 
