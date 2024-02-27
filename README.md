@@ -1,7 +1,19 @@
+Initial idea statement!
+
+For this project I want to produce a piece of animation that is ready to apply to architectural form via projection mapping, either a blank wall mass of any scale or something more purpose-built such as a stage set or other audio-visual installation.\
+I'm super interested in abstract, cyber-aesthetics and how they contrast against more organic forms, visual elements and movement. \I want to use the work of William Morris as a starting point for this, as the arts and crafts movement held some really fantastic development in nature patterns that translate well to more measured design analysis. \Tying in the coding concepts I'm interested in, this may feature some sort of recursive branching effect such as mycelial growth, and I want to include some sort of process of growth or change of state that flows over the course of the one-second loop. \I'm going to work with a maximum of one colour as a starting point and exapand this if it truly benefits the effect of the design.
+
+![sketch 1](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch.png?raw=true)\
+![sketch 2](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch2.png?raw=true)\
+![sketch 3](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch3.png?raw=true)\
+
+
+
 inspiration (music + space)\
 
 ![The ARK](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/theArk.png?raw=true)\
-ANTIVIJ, "THE ARK", Mexico\
+ANTIVIJ, "THE ARK", Mexico\ 
+https://cdm.link/2014/02/wander-a-garden-of-light-shape-and-sound-with-antivjs-the-ark-2/ \
 This is a really fantastic combination of what I'd like to be able to apply these visuals to. Sculptural architecture pavilion in an outdoor environment that uses ambient sound as well as its contect in a botanical garden to build an incredibly immersive spectacle. The lighting is very restrained and considered, white-on-black. I want to do something similar with a limited or monochrome palette. Nice mix of mechanical and organic-feeling motion builds on this vibe, and the form of the surface it is projected on is part of the composition through and through.
 
 ![G. Jones #1](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/gJones1.png?raw=true)\
