@@ -3,13 +3,11 @@ Initial idea statement!
 For this project I want to produce a piece of animation that is ready to apply to architectural form via projection mapping, either a blank wall mass of any scale or something more purpose-built such as a stage set or other audio-visual installation.\
 I'm super interested in abstract, cyber-aesthetics and how they contrast against more organic forms, visual elements and movement. \I want to use the work of William Morris as a starting point for this, as the arts and crafts movement held some really fantastic development in nature patterns that translate well to more measured design analysis. \Tying in the coding concepts I'm interested in, this may feature some sort of recursive branching effect such as mycelial growth, and I want to include some sort of process of growth or change of state that flows over the course of the one-second loop. \I'm going to work with a maximum of one colour as a starting point and exapand this if it truly benefits the effect of the design.
 
-![sketch 1](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch.png?raw=true)\
-![sketch 2](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch2.png?raw=true)\
-![sketch 3](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch3.png?raw=true)\
+![sketch 1](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch.jpg?raw=true)\
+![sketch 2](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch2.jpg?raw=true)\
+![sketch 3](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch3.jpg?raw=true)
 
-
-
-inspiration (music + space)\
+inspiration (music + space)
 
 ![The ARK](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/theArk.png?raw=true)\
 ANTIVIJ, "THE ARK", Mexico\ 
@@ -66,4 +64,4 @@ requirements:\
  thought process and execution. unique voice.\
 -this document tracks my thought process at every significant step
  and should be able to introduce the work well to a lay-person.\
--open source ethics, always.\
+-open source ethics, always.
