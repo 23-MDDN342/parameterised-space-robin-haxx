@@ -2,6 +2,7 @@
 
 Update: Here's my adaptation of the grid "field" which I'm going to be experimenting with. I'm using squares since they're pretty good at invoking all sorts of design mainstays of digital & mechanical design.
 Noise so far has been a really good way to move and colour-shift stuff in a way that looks smooth and kinda *alive* so I've attached it to lineweights and colour interpolation between white and the secondary colour I want to stick with. Currently a blue-green.
+!
 
 
 
