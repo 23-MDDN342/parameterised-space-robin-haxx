@@ -41,7 +41,7 @@ function draw_one_frame(cur_frac) {
 		noiseDetail(4,.5);
 		
 			
-		noiseColour = getNoiseValue(spacing+x, spacing+y, cur_frac, "MyNoise", 0, 1, 10 );
+		noiseColour = getNoiseValue(spacing+x, spacing+y, cur_frac, "MyNoise", 0, 1, 20 );
 			// push();
 			// stroke(255);
 			// strokeWeight(unitSize/100);
@@ -49,7 +49,7 @@ function draw_one_frame(cur_frac) {
 			// pop();
 
 			fill(lerpColor(white, darker, noiseColour));
-			rect(spacing*x, spacing*y, unitSize*2, unitSize*4);
+			rect(spacing*x, spacing*y, unitSize*2, unitSize/4);
 			
 			zero_to_zero = map(cur_frac,0,1,1,0);
 			
@@ -64,9 +64,9 @@ function draw_one_frame(cur_frac) {
 			}
 			fill(0);
 			if(cur_frac < 0.5){
-			rect(spacing*x, (spacing*y)-(spacing/2), unitSize*2, unitSize*cur_frac);
+			rect(spacing*x, (spacing*y)-(spacing/2), unitSize/4, unitSize*cur_frac);
 		}else{
-			rect(spacing*x, (spacing*y)-(spacing/2), unitSize*2, unitSize*zero_to_zero);
+			rect(spacing*x, (spacing*y)-(spacing/2), unitSize/4, unitSize*zero_to_zero);
 		}
 			fill(lerpColor(darker, white, noiseColour));
 			if(noiseColour < 0.4){

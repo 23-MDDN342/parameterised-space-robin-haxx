@@ -1,7 +1,6 @@
 
 
-Update: I've blocked out a region to start to consider negative space and projection onto designed form/ perhaps a wall that has openings like doors and windows.
-I really like the "fragmentation" effect that happens because very random / tight clustered noise controls the colour of the moving grid behins, while a solid grid is overlayed at half the line width. (this means that for 50% of the loop, only the corner accents of the chaotic, coloured moving grid is visible.) This timed motion feels a lot like the staggered movement of an assembly line, but the noise gives it an organic touch. I'm also just liking the lighter colour pallette as I move away from total minimalism.
+Update: Things have gotten pretty weird! I started gravitating towards structural lattice- like forms and made the blockout shape more resemble a modern city skyline. Then went full parametric architecture and turned the shape into a bezier shape, and used noise overlays to build up super alien looking facades.This could easily turn into a scene representing an alien city. Because of how the elements on the page draw, there's a bit of visual depth and parallax that already make this look pretty effective.
 !
 
 
