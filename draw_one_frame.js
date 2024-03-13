@@ -18,14 +18,14 @@ function draw_one_frame(cur_frac) {
 	
 	//translate(width / 2, height / 2);
 	
-	let unitsOnField = 33;
+	let unitsOnField = 133;
 	let unitSize = width/unitsOnField;
 	let spacing = width / unitsOnField ;
 
 	let noiseNumber;
-	// let darker = color("#004237"); //monochrome colour to lerp with white.
+	 let darker = color("#004237"); //monochrome colour to lerp with white.
 	let white = color("#ffffff");
-	 let darker = color("#000000");
+	// let darker = color("#000000");
 
 
 
@@ -41,7 +41,7 @@ function draw_one_frame(cur_frac) {
 		noiseDetail(4,.5);
 		
 			
-		noiseColour = getNoiseValue(spacing+x, spacing+y, cur_frac, "MyNoise", 0, 1, 5);
+		noiseColour = getNoiseValue(spacing+x, spacing+y, cur_frac, "MyNoise", 0, 1, 10 );
 			// push();
 			// stroke(255);
 			// strokeWeight(unitSize/100);
@@ -49,7 +49,7 @@ function draw_one_frame(cur_frac) {
 			// pop();
 
 			fill(lerpColor(white, darker, noiseColour));
-			//rect(spacing*x, spacing*y, unitSize, noiseColour*(unitSize/5));
+			rect(spacing*x, spacing*y, unitSize*2, unitSize*4);
 			
 			zero_to_zero = map(cur_frac,0,1,1,0);
 			
@@ -62,7 +62,12 @@ function draw_one_frame(cur_frac) {
 				//rect(spacing*x, spacing*y, zero_to_zero*unitSize, unitSize);
 				//rect(spacing*x, spacing*y, unitSize*2, zero_to_zero*unitSize*2);
 			}
-			rect(spacing*x, spacing*y, unitSize, unitSize/2);
+			fill(0);
+			if(cur_frac < 0.5){
+			rect(spacing*x, (spacing*y)-(spacing/2), unitSize*2, unitSize*cur_frac);
+		}else{
+			rect(spacing*x, (spacing*y)-(spacing/2), unitSize*2, unitSize*zero_to_zero);
+		}
 			fill(lerpColor(darker, white, noiseColour));
 			if(noiseColour < 0.4){
 				
@@ -71,7 +76,7 @@ function draw_one_frame(cur_frac) {
 			
 			
 			
-			rect(spacing*x, spacing*y, unitSize, unitSize/8);
+			rect(spacing*x, spacing*y, unitSize*4, unitSize/2);
 			rect(spacing*x, spacing*y, unitSize/2, unitSize);			
 			// Update 5/3:
 			// exercise for noise generation, using a grid. doesn't currently
@@ -90,14 +95,15 @@ function draw_one_frame(cur_frac) {
 
 
 		 push();
-		 fill(0);
+		 fill(0,10);
+		 scale(1.1);
 		 beginShape();
-		 vertex(width/4,0);
-		 vertex(width - (width/4),0);
-		 vertex(width - (width/4), (height/2));
+		 curveVertex(width/4,0);
+		 curveVertex(width - (width/4),0);
+		 curveVertex(width - (width/4), (height/2));
 		 vertex(width/2, height-(height/4));
-		 vertex(width/4, (height/2));
-	 
+		 curveVertex(width/4, (height/2));
+
 		 endShape(CLOSE);
 		 pop();
 		//ellipse(width/2,height/2,width/2.4,height/3.5);
