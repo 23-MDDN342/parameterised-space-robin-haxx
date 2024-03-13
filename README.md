@@ -1,6 +1,7 @@
 
 
-Update: I've built smooth animation into the current idea and experimented a bit with noise - I think this is a good place to both focus on code optimisation and scalability, and organic form drawing. But I capped this black-and-white grid idea off by turning it into something that's G Jones to a T so I'm satisfied with this tangent.
+Update: I've blocked out a region to start to consider negative space and projection onto designed form/ perhaps a wall that has openings like doors and windows.
+I really like the "fragmentation" effect that happens because very random / tight clustered noise controls the colour of the moving grid behins, while a solid grid is overlayed at half the line width. (this means that for 50% of the loop, only the corner accents of the chaotic, coloured moving grid is visible.) This timed motion feels a lot like the staggered movement of an assembly line, but the noise gives it an organic touch. I'm also just liking the lighter colour pallette as I move away from total minimalism.
 !
 
 

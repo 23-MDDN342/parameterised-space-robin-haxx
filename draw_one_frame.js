@@ -18,13 +18,13 @@ function draw_one_frame(cur_frac) {
 	
 	//translate(width / 2, height / 2);
 	
-	let unitsOnField = 16;
+	let unitsOnField = 33;
 	let unitSize = width/unitsOnField;
 	let spacing = width / unitsOnField ;
 
 	let noiseNumber;
 	let darker = color("#004237"); //monochrome colour to lerp with white.
-	let white = color("#ffffff");
+	let white = color("#fffff");
 	// let darker = color("#000000");
 
 
@@ -38,9 +38,10 @@ function draw_one_frame(cur_frac) {
 	for (let x =0; x <= (width / spacing); x++){
 		for (let y =0; y <= height / spacing; y++ ){
 		//	noiseDetail(10,.9);
-		noiseDetail(2);
+		noiseDetail(6);
+		
 			
-		noiseColour = getNoiseValue(spacing+x, spacing+y, cur_frac, "MyNoise", 0, 1, 15);
+		noiseColour = getNoiseValue(spacing+x, spacing+y, cur_frac, "MyNoise", 0, 1, 1);
 			// push();
 			// stroke(255);
 			// strokeWeight(unitSize/100);
@@ -52,19 +53,26 @@ function draw_one_frame(cur_frac) {
 			
 			zero_to_zero = map(cur_frac,0,1,1,0);
 			
+			
 			if(cur_frac < 0.5){
 				rect(spacing*x, spacing*y, cur_frac*unitSize*2, unitSize);
 				rect(spacing*x, spacing*y, unitSize, cur_frac*unitSize*2);
+				
 			} else {
 				rect(spacing*x, spacing*y, zero_to_zero*unitSize*2, unitSize);
 				rect(spacing*x, spacing*y, unitSize, zero_to_zero*unitSize*2);
 			}
-			rect(spacing*x, spacing*y, unitSize/1.5, unitSize/1.8);
+			rect(spacing*x, spacing*y, unitSize/1.5, unitSize/1.5);
 			fill(lerpColor(darker, white, noiseColour));
-			if(noiseColour < 0.6){
-				fill(0);
+			if(noiseColour < 0.4){
+				
+				fill(0,40);
 			}
-			rect(spacing*x, spacing*y, unitSize/2, unitSize/2);
+			fill(255,200);
+			
+			
+			rect(spacing*x, spacing*y, unitSize*2, unitSize/2);
+			rect(spacing*x, spacing*y, unitSize/2, unitSize*2);
 			
 			// Update 5/3:
 			// exercise for noise generation, using a grid. doesn't currently
@@ -72,12 +80,27 @@ function draw_one_frame(cur_frac) {
 			// gridlines connect, but I like the organic nature of the strobey effect.
 
 		}
+
 		
 		// rect(width/2,height/2,unitSize/3*unitsOnField,unitSize*unitsOnField,unitSize/2);
 		 fill(lerpColor(white, darker, noiseColour));
 		 if(noiseColour > 0.5){
 		 	fill(255,50);
+
 		 }
+
+
+		 push();
+		 fill(255);
+		 beginShape();
+		 vertex(width/4,0);
+		 vertex(width - (width/4),0);
+		 vertex(width - (width/4), (height/2));
+		 vertex(width/2, (height/4)+(height/20));
+		 vertex(width/4, (height/2));
+	 
+		 endShape(CLOSE);
+		 pop();
 		ellipse(width/2,height/2,width/2.4,height/3.5);
 		image(img,width/4,height/4,width/2,height/2);
 		// rect(width/2,height/2,unitSize/3*unitsOnField,unitSize/2.1*unitsOnField,unitSize/2);
