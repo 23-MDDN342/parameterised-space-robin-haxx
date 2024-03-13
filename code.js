@@ -13,14 +13,21 @@ let gifRecorder = null;
 let debugZoom = false;
 let debugView = false;
 let stickFrame = 0;
+let img;
 
 // *note: canvasWidth and canvasHeight will be defined before this script runs)
+
+function preload(){
+  img = loadImage('assets/eye.png');
+}
+
 
 function setup () {
   let main_canvas = createCanvas(canvasWidth,canvasHeight);
   let r = random(100);
   main_canvas.parent('canvasContainer');
   frameRate(24 * buffersPerFrame);
+  
 }
 
 function mousePressed(){
