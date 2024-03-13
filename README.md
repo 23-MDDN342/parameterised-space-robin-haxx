@@ -1,7 +1,6 @@
 
 
-Update: Here's my adaptation of the grid "field" which I'm going to be experimenting with. I'm using squares since they're pretty good at invoking all sorts of design mainstays of digital & mechanical design.
-Noise so far has been a really good way to move and colour-shift stuff in a way that looks smooth and kinda *alive* so I've attached it to lineweights and colour interpolation between white and the secondary colour I want to stick with. Currently a blue-green.
+Update: I've built smooth animation into the current idea and experimented a bit with noise - I think this is a good place to both focus on code optimisation and scalability, and organic form drawing. But I capped this black-and-white grid idea off by turning it into something that's G Jones to a T so I'm satisfied with this tangent.
 !
 
 
