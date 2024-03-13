@@ -12,7 +12,7 @@
 function draw_one_frame(cur_frac) {
 
 	rectMode(CENTER);
-	background(0);
+	background(255);
 	
 	noStroke();
 	
@@ -24,7 +24,7 @@ function draw_one_frame(cur_frac) {
 
 	let noiseNumber;
 	let darker = color("#004237"); //monochrome colour to lerp with white.
-	let white = color("#fffff");
+	let white = color("#ffffff");
 	// let darker = color("#000000");
 
 
@@ -84,8 +84,8 @@ function draw_one_frame(cur_frac) {
 		
 		// rect(width/2,height/2,unitSize/3*unitsOnField,unitSize*unitsOnField,unitSize/2);
 		 fill(lerpColor(white, darker, noiseColour));
-		 if(noiseColour > 0.5){
-		 	fill(255,50);
+		 if(noiseColour > .2){
+		 	fill(255,20);
 
 		 }
 
