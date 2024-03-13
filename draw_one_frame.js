@@ -23,9 +23,9 @@ function draw_one_frame(cur_frac) {
 	let spacing = width / unitsOnField ;
 
 	let noiseNumber;
-	let darker = color("#004237"); //monochrome colour to lerp with white.
+	 let darker = color("#004237"); //monochrome colour to lerp with white.
 	let white = color("#ffffff");
-	// let darker = color("#000000");
+	// let darker = color("#000fff");
 
 
 
@@ -41,7 +41,7 @@ function draw_one_frame(cur_frac) {
 		noiseDetail(6);
 		
 			
-		noiseColour = getNoiseValue(spacing+x, spacing+y, cur_frac, "MyNoise", 0, 1, 1);
+		noiseColour = getNoiseValue(spacing+x, spacing+y, cur_frac, "MyNoise", 0, 1, 5);
 			// push();
 			// stroke(255);
 			// strokeWeight(unitSize/100);
@@ -55,12 +55,12 @@ function draw_one_frame(cur_frac) {
 			
 			
 			if(cur_frac < 0.5){
-				rect(spacing*x, spacing*y, cur_frac*unitSize*2, unitSize);
-				rect(spacing*x, spacing*y, unitSize, cur_frac*unitSize*2);
+				rect(spacing*x, spacing*y, cur_frac*unitSize*4, unitSize/2);
+				rect(spacing*x, spacing*y, unitSize/2, cur_frac*unitSize*24);
 				
 			} else {
-				rect(spacing*x, spacing*y, zero_to_zero*unitSize*2, unitSize);
-				rect(spacing*x, spacing*y, unitSize, zero_to_zero*unitSize*2);
+				rect(spacing*x, spacing*y, zero_to_zero*unitSize*4, unitSize/2);
+				rect(spacing*x, spacing*y, unitSize/2, zero_to_zero*unitSize*24);
 			}
 			rect(spacing*x, spacing*y, unitSize/1.5, unitSize/1.5);
 			fill(lerpColor(darker, white, noiseColour));
@@ -71,8 +71,8 @@ function draw_one_frame(cur_frac) {
 			fill(255,200);
 			
 			
-			rect(spacing*x, spacing*y, unitSize*2, unitSize/2);
-			rect(spacing*x, spacing*y, unitSize/2, unitSize*2);
+			rect(spacing*x, spacing*y, unitSize*2, unitSize);
+			rect(spacing*x, spacing*y, unitSize, unitSize*2);
 			
 			// Update 5/3:
 			// exercise for noise generation, using a grid. doesn't currently
