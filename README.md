@@ -1,6 +1,7 @@
 
 
-Update: Things have gotten pretty weird! I started gravitating towards structural lattice- like forms and made the blockout shape more resemble a modern city skyline. Then went full parametric architecture and turned the shape into a bezier shape, and used noise overlays to build up super alien looking facades.This could easily turn into a scene representing an alien city. Because of how the elements on the page draw, there's a bit of visual depth and parallax that already make this look pretty effective.
+Update: Refactoring! Now I have a function to draw areas of grids, with noise. I want to keep packaging the code into this and have different "styles" e.g. arrangements of shapes that produce different textures, so I can focus on building the ideal composition and vibe.
+Right now I'm looking back through past iterations for what to include here, and frying my brain cleaning up the project file. I also moved some variables into the code.js draw scope.
 !
 
 

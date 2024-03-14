@@ -6,6 +6,8 @@ const debugZoomScale = 0.5;
 // this can be modified after we discuss in lecture
 const buffersPerFrame = 1;
 
+
+
 // probably best not to modify anything below this line
 const frameMax = 24;
 let recording = false;
@@ -14,6 +16,8 @@ let debugZoom = false;
 let debugView = false;
 let stickFrame = 0;
 let img;
+
+
 
 // *note: canvasWidth and canvasHeight will be defined before this script runs)
 
@@ -34,6 +38,8 @@ function mousePressed(){
 }
 
 function draw () {
+
+
   let animation_max_frames = frameMax * buffersPerFrame;
   let sticky_max_frames = animation_max_frames + stickFrame;
   let cur_frame = frameCount % sticky_max_frames;
@@ -41,6 +47,22 @@ function draw () {
     cur_frame = 0;
   }
   let cur_frac = map(cur_frame, 0, animation_max_frames, 0, 1);
+
+  let unitsOnField = 65;//THIS NEEDS A MORE ACCESSIBLE SCALABLE VARIABLE IN DRAW_ONE_FRAME
+  let unitSize = width/unitsOnField;
+  let spacing = width / unitsOnField ;
+
+  function renderSquares(x,y,rWidth,rHeight,noiseDetail,primary,secondary,cur_frac,unitsOnField,unitSize,spacing ){
+	for(let i = 0; i < (rWidth/spacing); i++){
+		for (let j = 0; j < (rHeight / spacing); j++){
+			noiseGen = getNoiseValue(i,j,cur_frac,"fNoise",0,1,noiseDetail);
+
+			fill(lerpColor(primary, secondary, noiseColour));
+			rect(spacing*i,spacing*j, unitSize, unitSize);
+
+		}
+	}
+}
 
   background(debugZoomBackground);
 
@@ -52,7 +74,7 @@ function draw () {
     translate(0.5 * -width, 0.5 * -height);    
   }
 
-  draw_one_frame(cur_frac);
+  draw_one_frame(cur_frac,unitsOnField,unitSize,spacing);
 
   pop();
 

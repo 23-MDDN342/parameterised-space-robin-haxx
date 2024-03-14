@@ -1,2 +1,2 @@
 var canvasWidth = 960;
-var canvasHeight = 720;
+var canvasHeight = 540;
