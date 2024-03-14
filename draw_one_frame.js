@@ -18,7 +18,7 @@ function draw_one_frame(cur_frac) {
 	
 	//translate(width / 2, height / 2);
 	
-	let unitsOnField = 65;
+	let unitsOnField = 133;
 	let unitSize = width/unitsOnField;
 	let spacing = width / unitsOnField ;
 
@@ -38,7 +38,7 @@ function draw_one_frame(cur_frac) {
 	for (let x =0; x <= (width / spacing); x++){
 		for (let y =0; y <= height / spacing; y++ ){
 		//	noiseDetail(10,.9);
-		noiseDetail(4,.5);
+		noiseDetail(6,.9);
 		
 		let noiseX = x;
 //		noiseX = mouseX;
@@ -47,7 +47,7 @@ function draw_one_frame(cur_frac) {
 
 
 
-		noiseColour = getNoiseValue(noiseX, noiseY, cur_frac, "MyNoise", 0, 1, 2 );
+		noiseColour = getNoiseValue(noiseX, noiseY, cur_frac, "MyNoise", 0, 1, 10 );
 
 		
 			// push();
@@ -88,9 +88,15 @@ function draw_one_frame(cur_frac) {
 			
 			//rect(spacing*x, spacing*y, unitSize*4, unitSize/2);
 
-			if (spacing*x > mouseX && spacing*y > mouseY){
-			rect(spacing*x, spacing*y, unitSize/8, unitSize*2);
+			if (spacing*x > mouseX && 
+				spacing*x < (mouseX + width/4) &&
+
+				spacing*y > mouseY &&
+				spacing*y < (mouseY + height/4)){
+
+			rect((spacing*x)-(width/8),spacing*y-(height/8), unitSize/8, unitSize*6);
 			//rect(spacing*x, spacing*y, unitSize*4, unitSize/4);
+
 }	
 
 			if(spacing*x == mouseX*x && spacing*y == mouseY*y){
