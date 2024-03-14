@@ -18,7 +18,7 @@ function draw_one_frame(cur_frac) {
 	
 	//translate(width / 2, height / 2);
 	
-	let unitsOnField = 133;
+	let unitsOnField = 65;
 	let unitSize = width/unitsOnField;
 	let spacing = width / unitsOnField ;
 
@@ -40,8 +40,16 @@ function draw_one_frame(cur_frac) {
 		//	noiseDetail(10,.9);
 		noiseDetail(4,.5);
 		
-			
-		noiseColour = getNoiseValue(spacing+x, spacing+y, cur_frac, "MyNoise", 0, 1, 20 );
+		let noiseX = x;
+//		noiseX = mouseX;
+		let noiseY = y;
+
+
+
+
+		noiseColour = getNoiseValue(noiseX, noiseY, cur_frac, "MyNoise", 0, 1, 2 );
+
+		
 			// push();
 			// stroke(255);
 			// strokeWeight(unitSize/100);
@@ -49,7 +57,8 @@ function draw_one_frame(cur_frac) {
 			// pop();
 
 			fill(lerpColor(white, darker, noiseColour));
-			rect(spacing*x, spacing*y, unitSize*2, unitSize/4);
+
+			rect(spacing*x, spacing*y, unitSize*2, unitSize/8);
 			
 			zero_to_zero = map(cur_frac,0,1,1,0);
 			
@@ -64,20 +73,36 @@ function draw_one_frame(cur_frac) {
 			}
 			fill(0);
 			if(cur_frac < 0.5){
-			rect(spacing*x, (spacing*y)-(spacing/2), unitSize/4, unitSize*cur_frac);
+			//rect(spacing*x, (spacing*y)-(spacing/2), unitSize/4, unitSize*cur_frac);
 		}else{
-			rect(spacing*x, (spacing*y)-(spacing/2), unitSize/4, unitSize*zero_to_zero);
+			//rect(spacing*x, (spacing*y)-(spacing/2), unitSize/4, unitSize*zero_to_zero);
 		}
 			fill(lerpColor(darker, white, noiseColour));
 			if(noiseColour < 0.4){
 				
-				fill(0,40);
+				fill(0,80);
+
 			}
 			
+
 			
+			//rect(spacing*x, spacing*y, unitSize*4, unitSize/2);
+
+			if (spacing*x > mouseX && spacing*y > mouseY){
+			rect(spacing*x, spacing*y, unitSize/8, unitSize*2);
+			//rect(spacing*x, spacing*y, unitSize*4, unitSize/4);
+}	
+
+			if(spacing*x == mouseX*x && spacing*y == mouseY*y){
+				//	fill(255,255,0);
+				
+				fill(lerpColor(darker, white, noiseColour));
+				//rect(mouseX,mouseY,unitSize*2,unitSize*2);
+				//rect(mouseX,mouseY,unitSize,unitSize);
+				
+				}
 			
-			rect(spacing*x, spacing*y, unitSize*4, unitSize/2);
-			rect(spacing*x, spacing*y, unitSize/2, unitSize);			
+
 			// Update 5/3:
 			// exercise for noise generation, using a grid. doesn't currently
 			// scale lineweights properly and could do better with how the
@@ -95,7 +120,7 @@ function draw_one_frame(cur_frac) {
 
 
 		 push();
-		 fill(0,10);
+		 fill(0,20);
 		 scale(1.1);
 		 beginShape();
 		 curveVertex(width/4,0);
