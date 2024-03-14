@@ -47,7 +47,7 @@ function draw_one_frame(cur_frac) {
 
 
 
-		noiseColour = getNoiseValue(noiseX, noiseY, cur_frac, "MyNoise", 0, 1, 10 );
+		noiseColour = getNoiseValue(noiseX, noiseY, cur_frac, "MyNoise", 0, 1, 20 );
 
 		
 			// push();
