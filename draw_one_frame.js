@@ -8,25 +8,41 @@
    smoothness: 1 means elements are not related. larger numbers cause groupings.
 */
 
-function renderSquares(x,y,rWidth,rHeight,noiseDetail,primary,secondary,cur_frac,unitsOnField,unitSize,spacing ){
+function renderSquares(x,y,rWidth,rHeight,noiseDetail,primary,secondary,strokeClr,cur_frac,unitsOnField,unitSize,spacing ){
 	zero_to_zero = map(cur_frac,0,1,1,0);
+
 	push();
-	translate(x,y);
-	stroke(0,100,100);
-	strokeWeight(unitSize/20);
+	translate(x,y-unitSize*.375);
+
+
+	stroke(strokeClr);
+	//stroke(0,100,100);
+	strokeWeight(unitSize/40);
 	for(let i = 0; i < (rWidth/spacing); i++){
 		for (let j = 0; j < (rHeight / spacing); j++){
 			noiseGen = getNoiseValue(i,j,cur_frac,"fNoise",0,1,noiseDetail);
 
 			fill(lerpColor(primary, secondary, noiseGen));
 			if(cur_frac < 0.5){
-				rect(spacing*i,spacing*j,  unitSize*4*cur_frac, unitSize/2);
+				push();
+				noStroke();
 				fill(255);
-				rect(spacing*i,spacing*j, unitSize/4, unitSize*4*cur_frac)
+				rect(spacing*i,(spacing*j)-(unitSize/4),  (unitSize*4*cur_frac)-(unitSize/2), unitSize/2);
+				pop();
+				rect(spacing*i,spacing*j, unitSize/2, (unitSize*2*noiseGen)+unitSize);
+				
+				
 			}else{
-				rect(spacing*i,spacing*j, unitSize*4*zero_to_zero, unitSize/2);
+				push();
+				noStroke();
 				fill(255);
-				rect(spacing*i,spacing*j, unitSize/4, unitSize*4*zero_to_zero);
+				rect(spacing*i,(spacing*j)-(unitSize/4), (unitSize*4*zero_to_zero)-(unitSize/2), unitSize/2);
+				pop();
+				push();
+				//fill(255);
+				rect(spacing*i,spacing*j, unitSize/2, (unitSize*2*noiseGen)+unitSize);
+				pop();
+				
 			}
 
 		}
@@ -51,6 +67,7 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 	let noiseNumber;
 	 let darker = color("#004237"); //monochrome colour to lerp with white.
 	let white = color("#ffffff");
+	let black = color("000000");
 	// let darker = color("#000000");
 
 
@@ -64,7 +81,7 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 	for (let x =0; x <= (width / spacing); x++){
 		for (let y =0; y <= height / spacing; y++ ){
 		//	noiseDetail(10,.9);
-		noiseDetail(6,.2);
+		noiseDetail(6,.4);
 		
 		let noiseX = x;
 //		noiseX = mouseX;
@@ -73,7 +90,7 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 
 
 
-		noiseColour = getNoiseValue(noiseX, noiseY, cur_frac, "MyNoise", 0, 1, 30 );
+		noiseColour = getNoiseValue(noiseX, noiseY, cur_frac, "MyNoise", 0, 1, 50 );
 
 		
 			// push();
@@ -90,12 +107,12 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 			
 			
 			if(cur_frac < 0.5){
-				rect(spacing*x, spacing*y, cur_frac*unitSize/2, unitSize*2);
-			//	rect(spacing*x, spacing*y, unitSize*2, cur_frac*unitSize);
+				rect(spacing*x, spacing*y, cur_frac*unitSize/8, unitSize/2);		//gridlines vertical
+				rect(spacing*x, spacing*y, unitSize/2, (cur_frac*unitSize/8));		//gridlines horizontal
 				
 			} else {
-				rect(spacing*x, spacing*y, zero_to_zero*unitSize/2, unitSize*2);
-			//	rect(spacing*x, spacing*y, unitSize*2, zero_to_zero*unitSize);
+				rect(spacing*x, spacing*y, zero_to_zero*unitSize/8, unitSize/2);  	//grid lines vertical
+				rect(spacing*x, spacing*y, unitSize/2, zero_to_zero*unitSize/8);	//gridlines horizontal
 			}
 			//rect(spacing*x, spacing*y, unitSize*2, unitSize);
 			fill(0);
@@ -113,7 +130,7 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 			
 
 			
-			rect(spacing*x, spacing*y, unitSize*2, unitSize/8);
+			// rect(spacing*x, spacing*y, unitSize*2, unitSize/8);
 			//OLD IDEA: drawing based on mouse position 
 
 // 			if (
@@ -176,10 +193,22 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 
 	}
 	//fill(255,90);
+	renderSquares(width/6+(unitSize*.25),height/4,width/8,height,10,darker,white,white,cur_frac,unitsOnField,unitSize,spacing);
+	renderSquares(width/6,height/4,width/8,height,50,white,darker,white,cur_frac,unitsOnField,unitSize,spacing);
 	
-	renderSquares(width/6,height/4,width/8,height,50,white,darker,cur_frac,unitsOnField,unitSize,spacing);
-	renderSquares(width/3,height/4,width- width/4, height/6,1,white,darker,cur_frac,unitsOnField,unitSize,spacing);
-	renderSquares((width/3)-(unitSize/4),height/4,width- width/4, height/6,1,white,white,cur_frac,unitsOnField,unitSize,spacing);
+	//renderSquares((width/3)+(unitSize/2),height/4,width- width/4, height/6,1,darker,darker,white,cur_frac,unitsOnField,unitSize,spacing);
+	renderSquares(width/3,height/4,width- width/4, height/6,1,white,darker,darker,cur_frac,unitsOnField,unitSize,spacing);
+
+	renderSquares((width/3)-(unitSize/4),height/4,width- width/4, height/6,1,white,white,darker,cur_frac,unitsOnField,unitSize,spacing);
+	push();
+	rectMode(CORNER);
+	fill(255);
+	rect(0,(height/2.45),width,height/20);
+	renderSquares(width/3+(unitSize/2),0,width/4, height,1,darker,white,darker,cur_frac,unitsOnField,unitSize,spacing);
+	rect(width/2.4, 0, width/65, height);
+	
+	pop();
+	
 
 }
 

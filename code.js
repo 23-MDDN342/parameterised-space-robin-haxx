@@ -52,17 +52,7 @@ function draw () {
   let unitSize = width/unitsOnField;
   let spacing = width / unitsOnField ;
 
-  function renderSquares(x,y,rWidth,rHeight,noiseDetail,primary,secondary,cur_frac,unitsOnField,unitSize,spacing ){
-	for(let i = 0; i < (rWidth/spacing); i++){
-		for (let j = 0; j < (rHeight / spacing); j++){
-			noiseGen = getNoiseValue(i,j,cur_frac,"fNoise",0,1,noiseDetail);
 
-			fill(lerpColor(primary, secondary, noiseColour));
-			rect(spacing*i,spacing*j, unitSize, unitSize);
-
-		}
-	}
-}
 
   background(debugZoomBackground);
 
