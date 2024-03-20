@@ -7,9 +7,9 @@
 	// There are a few ways of writing variants of functions, here I just have one.
 	// This is mainly because I am working on creating a class for this functionality.
 	// Also because I need to get something on the canvas.
-
-function renderSquares(x,y,rWidth,rHeight,noiseDetail,primary,secondary,strokeClr,cur_frac,unitsOnField,unitSize,spacing ){
 	
+function renderSquares(x,y,rWidth,rHeight,noiseDetail,primary,secondary,strokeClr,cur_frac,unitsOnField,unitSize,spacing, modifier ){
+
 	zero_to_zero = map(cur_frac,0,1,1,0); // minor fumble: a few things, like this, have to be declared in 2 places
 
 	push(); 	// very very very necessary to put this all in a push/pop.
@@ -160,69 +160,80 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 	push();
 	stroke(lerpColor(white, darker, noiseColour));
 	fill(white);
-	strokeWeight(unitSize*.1);
+	strokeWeight(unitSize*.05);
 	circle(
 		// here I use an exponential multiplier on cur_frac for curved velocity 
 		// (direction and speed changes at a nonlinear rate)
 		(width*.1)+(width*(.2**cur_frac*.65)),		// x position
 		height*.3 + (height * (.0005 ** phase*.15)),		// y position
-		width*.1+(width*phase*.05)); 				// radius
+		width*.07+(width*phase*.1)); 				// radius
 	pop();
+
+	let modifier = phase; // my favourite variable in this whole project.
 	
 	// horizontal skyline, noise detail of 5. 2 looks quite cool too.
-	//(below is an unused extra later of buildings, makes it too high in contrast)
-	renderSquares((width*.3)+(unitSize*.5),height*.6,width- width*.25, height*.15,5,darker,darker,white,cur_frac,unitsOnField,unitSize,spacing);
+	// first, this backing shadow layer is drawn to add depth.
+	renderSquares(
+		(width*.3)+(unitSize*.5),height*.6,
+		width- width*.25, height*.15,
+		5,darker,darker,white,cur_frac* modifier,unitsOnField,unitSize,spacing
+		);
 	renderSquares(
 		width*.3,height*.6,  												// x and y position
 		width- (width*.25), height*.15, 									// width and height
-		5,white,darker,darker,cur_frac,unitsOnField,unitSize,spacing		// noise detail level, colours, inherited parameters
+		5,white,darker,darker,cur_frac * modifier,unitsOnField,unitSize,spacing		// noise detail level, colours, inherited parameters
 		);		
 	renderSquares(
 		(width*.3)-(unitSize/4),height*.6,
 		width- (width*.25), height*.15,
-		5,white,white,darker,cur_frac,unitsOnField,unitSize,spacing
+		5,white,white,darker,cur_frac * modifier,unitsOnField,unitSize,spacing
 		);
 	push();
 	rectMode(CORNER);
 	fill(white);
-	rect(0,(height*.72),width,height*.05); 					// skyline: whiteout
+	rect(0,(height*.72),width,height*.055); 				// skyline: whiteout
 	push();
 	fill(whiteAlpha);
-	rect(0,(height*.72),width,height*.3);					// ground: white alpha region
+	rect(width*.1,(height*.72),width,height*.3);			// ground: white alpha region
 	pop(); 
+
+	modifier = phase * 0.5;
 	// bleepity bloopity traffic region
 	renderSquares(
 		width*.34,height*.75,
 		width*.2, height*.25,
-		1,darker,white,darker,cur_frac,unitsOnField,unitSize,spacing
+		1,darker,white,darker,cur_frac*modifier,unitsOnField,unitSize,spacing
 		);
-	rect(width*.413, height*.55, width*.015, height*.45); 	// intersection: vertical whiteout, ~half screen height
+	rect(width*.413, height*.55, width*.017, height*.45); 	// intersection: vertical whiteout, ~half screen height
 	rect(0,(height*.98),width,height*.05); 					// crops the bleepity bloopity traffic region *just* before the canvas floor
 	pop();
 	
 	// skyscraper on the left
+	    modifier = phase*.4 								//absolutely wild cool animation for skyscraper shadow
 	renderSquares(
-		width*.15+(unitSize*.25),height/4,
-		width/8,height,
+		width*.15+(unitSize*.25),height*.25,
+		width*.125,height,
 		10,darker,white,white,
-		cur_frac,unitsOnField,unitSize*2,spacing*1 // I realised I can make changes to these parameters. This made this buiding waay cooler.
+		cur_frac*modifier,unitsOnField,unitSize*2,spacing*1 // I realised I can make changes to these parameters. This made this buiding waay cooler.
 		); 	
+		modifier = phase * 1.6;
 	renderSquares(
-		width*.15,height/4,
+		width*.15,height*.25,
 		width/8,height,
-		50,white,darker,white,cur_frac,unitsOnField,unitSize,spacing
+		100,white,darker,white,
+		cur_frac * modifier,unitsOnField,unitSize,spacing
 		);
 
 
 	// where I'm at with the OOP refactor. 
 	let testRegion = new TextureGrid(
-		width/2,height/2, 	// x and y position
-		width/6, height/4,				// region width and height
+		width*.25,height*.25, 	// x and y position
+		width*.125, height*.25,				// region width and height
 		darker, 5, white, darker		// stroke, noise detail level, primary and secondary colour
 	);
 
 	//testRegion.renderRegion(cur_frac,unitsOnField,unitSize,spacing); 
-	// THIS DRAWS IT !! I just had an issue where it wouldn't display, this has me very excited.
+	// UNCOMMENTING THIS DRAWS IT !! I just had an issue where it wouldn't display, this has me very excited.
 	// Holding off on a full conversion for now due to a performance decrease I noticed.	
 
 }

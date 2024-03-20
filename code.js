@@ -64,7 +64,7 @@ function draw () {
   }
   let cur_frac = map(cur_frame, 0, animation_max_frames, 0, 1);
 
-  let unitsOnField = 65;//THIS NEEDS A MORE ACCESSIBLE SCALABLE VARIABLE IN DRAW_ONE_FRAME
+  let unitsOnField = 65;//THIS COULD DO WITH A MORE ACCESSIBLE SCALABLE VARIABLE IN DRAW_ONE_FRAME
   let unitSize = width/unitsOnField;
   let spacing = width / unitsOnField ;
 
