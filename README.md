@@ -7,14 +7,15 @@ Right now I'm looking back through past iterations for what to include here, and
 
 
 
-Initial idea statement!
+Initial idea statement; revisited..
 
-For this project I want to produce a piece of animation that is ready to apply to architectural form via projection mapping, either a blank wall mass of any scale or something more purpose-built such as a stage set or other audio-visual installation.\
+For this project I aimed to produce a piece of animation that is ready to apply to architectural form via projection mapping, either a blank wall mass of any scale or something more purpose-built such as a stage set or other audio-visual installation.\
+I think I've made a lot of progress in working out how to do this, and the guidance in creating noise has been really helpful. Being able to define a region to split uniformy into components, then coordinate their behaviour with either smooth animation or spontaneous noise, is the key to what I was going for here. 
+I explored a few different ways the grid components could be designed, mostly by layering animated rectangle shapes, sometimes making each component large enough to layer over its neighbours. I coded a tool to move the region by mouse movement, wrote code for a "highlight" layer of elements to follow the mouse around, and finally settled on the idea of functions to create set x,y,width,height regions of different texture compositions.\
 I'm super interested in abstract, cyber-aesthetics and how they contrast against more organic forms, visual elements and movement. 
-I want to use the work of William Morris as a starting point for this, as the arts and crafts movement held some really fantastic development in nature patterns that translate well to more measured design analysis.
+I explored different tech-leaning design styles, starting with darker, strobey stuff inspired by DJ visuals - but moving towards using the tools I built to design the final composition for a Zoom background, I decided on a brighter, futuristic cityscape.
 
-Tying in the coding concepts I'm interested in, this may feature some sort of recursive branching effect such as mycelial growth, and I want to include some sort of process of growth or change of state that flows over the course of the one-second loop. 
-I'm going to work with a maximum of one colour as a starting point and exapand this if it truly benefits the effect of the design.
+I stuck to one colour to interpolate to and from white, and the last thing I am trying to implement is a branching algorithm.
 
 ![sketch 1](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/sketch.jpg?raw=true)\
 ![sketch 2](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch2.jpg?raw=true)\
@@ -27,10 +28,6 @@ ANTIVIJ, "THE ARK", Mexico \
 https://cdm.link/2014/02/wander-a-garden-of-light-shape-and-sound-with-antivjs-the-ark-2/ \
 This is a really fantastic combination of what I'd like to be able to apply these visuals to. Sculptural architecture pavilion in an outdoor environment that uses ambient sound as well as its contect in a botanical garden to build an incredibly immersive spectacle. The lighting is very restrained and considered, white-on-black. I want to do something similar with a limited or monochrome palette. Nice mix of mechanical and organic-feeling motion builds on this vibe, and the form of the surface it is projected on is part of the composition through and through.
 
-<<<<<<< HEAD
-here's a change -robbie
-fresdrfgtyh
-=======
 ![G. Jones #1](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/gJones1.png?raw=true)\
 G. Jones, "PATHS" Live @ Joy theater, New Orleans\
 https://www.youtube.com/watch?v=8xlktP4jdps \
@@ -86,4 +83,3 @@ requirements:\
 -this document tracks my thought process at every significant step
  and should be able to introduce the work well to a lay-person.\
 -open source ethics, always.
->>>>>>> 74dd50cee4f10d3a46654f31f7f4cf630ad71ea7

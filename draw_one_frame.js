@@ -1,214 +1,229 @@
-/* 
-   getNoiseValue arguments:
-   x: current grid location across
-   y: current grid location down
-   loop: can be any value from 0-1 and will loop
-   name: the "name" of the lookup table. probably change this each time.
-   min/max: the minimum and maximum of the value to return
-   smoothness: 1 means elements are not related. larger numbers cause groupings.
-*/
+
+	// PROJECT 1 CODE EVOLUTION, PHASE 2: NOISE- RENDERING FUNCTION
+	// I know you're seeing phase 2 first, but this is how scope works.
+	// A function that packages up my main means of drawing regions of animated elements,
+	// and provides functionality whenever it is deployed.
+	// Just look at all those variables.
+	// There are a few ways of writing variants of functions, here I just have one.
+	// This is mainly because I am working on creating a class for this functionality.
+	// Also because I need to get something on the canvas.
 
 function renderSquares(x,y,rWidth,rHeight,noiseDetail,primary,secondary,strokeClr,cur_frac,unitsOnField,unitSize,spacing ){
-	zero_to_zero = map(cur_frac,0,1,1,0);
+	
+	zero_to_zero = map(cur_frac,0,1,1,0); // minor fumble: a few things, like this, have to be declared in 2 places
 
-	push();
+	push(); 	// very very very necessary to put this all in a push/pop.
 	translate(x,y-unitSize*.375);
-
-
 	stroke(strokeClr);
-	//stroke(0,100,100);
-	strokeWeight(unitSize/40);
+	strokeWeight(unitSize*0.025);
 	for(let i = 0; i < (rWidth/spacing); i++){
 		for (let j = 0; j < (rHeight / spacing); j++){
-			noiseGen = getNoiseValue(i,j,cur_frac,"fNoise",0,1,noiseDetail);
 
+			let noiseGen = getNoiseValue(i,j,cur_frac,"fNoise",0,.8,noiseDetail);
 			fill(lerpColor(primary, secondary, noiseGen));
+
+			// "phase" changes when condition is met. phases explained where variable is defined in draw_one_frame.
 			if(cur_frac < 0.5){
-				push();
-				noStroke();
-				fill(255);
-				rect(spacing*i,(spacing*j)-(unitSize/4),  (unitSize*4*cur_frac)-(unitSize/2), unitSize/2);
-				pop();
-				rect(spacing*i,spacing*j, unitSize/2, (unitSize*2*noiseGen)+unitSize);
-				
-				
-			}else{
-				push();
-				noStroke();
-				fill(255);
-				rect(spacing*i,(spacing*j)-(unitSize/4), (unitSize*4*zero_to_zero)-(unitSize/2), unitSize/2);
-				pop();
-				push();
-				//fill(255);
-				rect(spacing*i,spacing*j, unitSize/2, (unitSize*2*noiseGen)+unitSize);
-				pop();
-				
+			phase = cur_frac;	
+			} else{
+			phase = zero_to_zero;
 			}
+
+			push();
+			noStroke();
+			fill(white);
+			rect(
+				spacing*i,(spacing*j),  
+				(unitSize*2*phase)+(unitSize*.5), unitSize*.4*phase
+				);
+			pop();
+
+			rect(
+				spacing*i,spacing*j, 
+				unitSize*.5, (unitSize*2*noiseGen)+unitSize
+				);
 
 		}
 	}
-	pop();
+	pop(); // cannot stress enough how necessary this is.
 }
 
 
 function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 
+	let noiseNumber;
+	let darker = 		color("#004237"); 	// monochrome colour to lerp with white.
+	let white = 		color("#ffffff");	// fun idea: switch the HEX out with neon pink
+	let black = 		color("000000");	// I don't actually think this is used any more!
+	let darkerAlpha = 	color(0,100,100,60);
+	let whiteAlpha = 	color(255,255,255,220);
+	let whiteLowAlpha = color(255,255,255,30);
 
+	let phase; // used to alternate between cur_frac and its inverse (zero_to_zero)
+	let zero_to_zero = map(cur_frac,0,1,1,0); // uno_reverse_card.jpg
+		
+	if(cur_frac < 0.5){
+	phase = cur_frac;	
+	} else{
+	phase = zero_to_zero;
+	}
 
 	rectMode(CENTER);
-	background(255);
-	
+	background(white);
 	noStroke();
-	
-	//translate(width / 2, height / 2);
-	
 
+	// PROJECT 1 CODE EVOLUTION, PHASE 1: EXPOSED NESTED FOR-LOOP
+	// draws a "+" grid over the entire canvas
+	// uses noise for line thickness and colour interpolation
+	// (adapted from week 2 content)
 
-	let noiseNumber;
-	 let darker = color("#004237"); //monochrome colour to lerp with white.
-	let white = color("#ffffff");
-	let black = color("000000");
-	// let darker = color("#000000");
-
-
-
-	// for (let x = 1; x < (width / spacing) -1; x++){
-	// 	for (let y = 1; y < (height / spacing)-1; y++)
-	// }
-
-
+	// this *could* be refactored as an overload function of renderSquares(),
+	// but now I've built the class I'll refactor it into that if I have time instead.
 
 	for (let x =0; x <= (width / spacing); x++){
 		for (let y =0; y <= height / spacing; y++ ){
-		//	noiseDetail(10,.9);
-		noiseDetail(6,.4);
 		
-		let noiseX = x;
-//		noiseX = mouseX;
-		let noiseY = y;
-
-
-
-
+		noiseDetail(6,.4);
+		// absolutely love this sparkly effect from boosting noise x and y so made sure it scales and implemented
+		let noiseX = x*(width / spacing);
+		let noiseY = y*(height / spacing);
+	
 		noiseColour = getNoiseValue(noiseX, noiseY, cur_frac, "MyNoise", 0, 1, 50 );
 
-		
-			// push();
-			// stroke(255);
-			// strokeWeight(unitSize/100);
-			// line(spacing*x/4,spacing*y/4,spacing*x,spacing*y);
-			// pop();
+		fill(lerpColor(white, darker, noiseColour));
+		// STAR BLEEP-BLOOP THING 
+		// if(noiseColour > .5){
+		// 	fill(white);
+		// }
 
-			fill(lerpColor(white, darker, noiseColour));
+		rect(spacing*x, spacing*y, phase*unitSize/8, unitSize/2);		//gridlines vertical
+		rect(spacing*x, spacing*y, unitSize/2, (phase*unitSize/8));		//gridlines horizontal
 
-			//rect(spacing*x, spacing*y, unitSize/2, unitSize*2);
-			
-			zero_to_zero = map(cur_frac,0,1,1,0);
-			
-			
-			if(cur_frac < 0.5){
-				rect(spacing*x, spacing*y, cur_frac*unitSize/8, unitSize/2);		//gridlines vertical
-				rect(spacing*x, spacing*y, unitSize/2, (cur_frac*unitSize/8));		//gridlines horizontal
-				
-			} else {
-				rect(spacing*x, spacing*y, zero_to_zero*unitSize/8, unitSize/2);  	//grid lines vertical
-				rect(spacing*x, spacing*y, unitSize/2, zero_to_zero*unitSize/8);	//gridlines horizontal
+			//OLD IDEAS: 
+			//rect(spacing*x, spacing*y, unitSize*2, unitSize/8); // very cool horizontal motion lines
+			 
+			// DRAWING BASED ON MOUSE POSITION
+			if (
+				spacing*x > (mouseX + width * .01) && 
+				spacing*x < (mouseX + width*.1) &&
+				spacing*y > mouseY &&
+				spacing*y < (mouseY + height*.1)&&
+				x==x // redundant condition so I can comment and add stuff line-by-line 
+			)
+			{
+			for(let b=0; b< 5; b++){
+			rect((spacing*x)-((unitSize*2)),spacing*y-(height*.1), unitSize*.1, unitSize*4);
+			rect((spacing*x), (spacing*y)-(unitSize*2), unitSize*4, unitSize*.1);
 			}
-			//rect(spacing*x, spacing*y, unitSize*2, unitSize);
-			fill(0);
-			if(cur_frac < 0.5){
-			//rect(spacing*x, (spacing*y)-(spacing/2), unitSize/4, unitSize*cur_frac);
-		}else{
-			//rect(spacing*x, (spacing*y)-(spacing/2), unitSize/4, unitSize*zero_to_zero);
+			}	
+			//  CUBE AT MOUSE POS
+			// 	if(spacing*x == mouseX*x && spacing*y == mouseY*y){
+			// 	//	fill(darker);	
+			// 	fill(lerpColor(darker, white, noiseColour));
+			// 	rect(mouseX,mouseY,unitSize*2,unitSize*2);
+			// 	rect(mouseX,mouseY,unitSize,unitSize);
+			// 	}
 		}
-			fill(lerpColor(darker, white, noiseColour));
-			if(noiseColour < 0.8){
-				
-				fill(0,80);
-
-			}
-			
-
-			
-			// rect(spacing*x, spacing*y, unitSize*2, unitSize/8);
-			//OLD IDEA: drawing based on mouse position 
-
-// 			if (
-// 				spacing*x > mouseX && 
-// 				spacing*x < (mouseX + width/8) &&
-
-// 				//spacing*y > mouseY &&
-// 				//spacing*y < (mouseY + height/8)&&
-// 				x==x // redundant condition so I can comment and add stuff line-by-line 
-// 				){
-// 			// for(let b=0; b< 5; b++){
-// 			// rect((spacing*x)-((width/16)*4*b),spacing*y-(height/16), unitSize/8, unitSize*6);
-// 			// //rect(spacing*x, spacing*y, unitSize*4, unitSize/4);
-// 			// }
-// }	
-
-			if(spacing*x == mouseX*x && spacing*y == mouseY*y){
-				//	fill(255,255,0);
-				
-				fill(lerpColor(darker, white, noiseColour));
-				//rect(mouseX,mouseY,unitSize*2,unitSize*2);
-				//rect(mouseX,mouseY,unitSize,unitSize);
-				
-				}
-			
-
-			// Update 5/3:
-			// exercise for noise generation, using a grid. doesn't currently
-			// scale lineweights properly and could do better with how the
-			// gridlines connect, but I like the organic nature of the strobey effect.
-
-		}
-
-		
-		// rect(width/2,height/2,unitSize/3*unitsOnField,unitSize*unitsOnField,unitSize/2);
-		 fill(lerpColor(white, darker, noiseColour));
-		 if(noiseColour > .2){
-		 	fill(0,20);
-
-		 }
-
-
+		// background shape whiteout. 
+		// only current scalability issue in the project; alpha strength changes with resolution
+		// this is because of how I've overlaid it with the grid loop. 
+		// I like the gradient it creates in any case, so I'm leaving it as is :)
 		 push();
-		 fill(255,20);
+		 fill(whiteLowAlpha);
 		 scale(1.1);
 		 beginShape();
-		 curveVertex(width/4,0);
-		 curveVertex(width - (width/4),0);
-		 curveVertex(width - (width/4), (height/2));
-		 vertex(width/2, height-(height/4));
-		 curveVertex(width/4, (height/2));
-
+		 curveVertex(width*.25,0);
+		 curveVertex(width - (width*.25),0);
+		 curveVertex(width - (width*.25), (height*.5));
+		 vertex(width*.5, height-(height*.25));
+		 curveVertex(width*.25, (height*.5));
 		 endShape(CLOSE);
 		 pop();
 
-
-		// ellipse(width/2,height/2,width/2.4,height/3.5);
-		// image(img,width/4,height/4,width/2,height/2);
-		// rect(width/2,height/2,unitSize/3*unitsOnField,unitSize/2.1*unitsOnField,unitSize/2);
+		// PLACEHOLDER EYE LIVES!!
+		//ellipse(width/2,height/2,width/2.4,height/3.5);
+		//image(img,width/4,height/4,width/2,height/2);
 
 	}
-	//fill(255,90);
-	renderSquares(width/6+(unitSize*.25),height/4,width/8,height,10,darker,white,white,cur_frac,unitsOnField,unitSize,spacing);
-	renderSquares(width/6,height/4,width/8,height,50,white,darker,white,cur_frac,unitsOnField,unitSize,spacing);
 	
-	//renderSquares((width/3)+(unitSize/2),height/4,width- width/4, height/6,1,darker,darker,white,cur_frac,unitsOnField,unitSize,spacing);
-	renderSquares(width/3,height/4,width- width/4, height/6,1,white,darker,darker,cur_frac,unitsOnField,unitSize,spacing);
-
-	renderSquares((width/3)-(unitSize/4),height/4,width- width/4, height/6,1,white,white,darker,cur_frac,unitsOnField,unitSize,spacing);
 	push();
-	rectMode(CORNER);
-	fill(255);
-	rect(0,(height/2.45),width,height/20);
-	renderSquares(width/3+(unitSize/2),0,width/4, height,1,darker,white,darker,cur_frac,unitsOnField,unitSize,spacing);
-	rect(width/2.4, 0, width/65, height);
-	
+	noFill();
+	stroke(darkerAlpha);
+	strokeWeight(unitSize*.1);
+	curve(width*.1,height*6,
+		width*.2,height*.7,
+		width*.8,height*.6,
+		width*.1,height);
+	pop();
+
+	// sun. no day/night cycle here.
+	push();
+	stroke(lerpColor(white, darker, noiseColour));
+	fill(white);
+	strokeWeight(unitSize*.1);
+	circle(
+		// here I use an exponential multiplier on cur_frac for curved velocity 
+		// (direction and speed changes at a nonlinear rate)
+		(width*.1)+(width*(.2**cur_frac*.65)),		// x position
+		height*.3 + (height * (.0005 ** phase*.15)),		// y position
+		width*.1+(width*phase*.05)); 				// radius
 	pop();
 	
+	// horizontal skyline, noise detail of 5. 2 looks quite cool too.
+	//(below is an unused extra later of buildings, makes it too high in contrast)
+	renderSquares((width*.3)+(unitSize*.5),height*.6,width- width*.25, height*.15,5,darker,darker,white,cur_frac,unitsOnField,unitSize,spacing);
+	renderSquares(
+		width*.3,height*.6,  												// x and y position
+		width- (width*.25), height*.15, 									// width and height
+		5,white,darker,darker,cur_frac,unitsOnField,unitSize,spacing		// noise detail level, colours, inherited parameters
+		);		
+	renderSquares(
+		(width*.3)-(unitSize/4),height*.6,
+		width- (width*.25), height*.15,
+		5,white,white,darker,cur_frac,unitsOnField,unitSize,spacing
+		);
+	push();
+	rectMode(CORNER);
+	fill(white);
+	rect(0,(height*.72),width,height*.05); 					// skyline: whiteout
+	push();
+	fill(whiteAlpha);
+	rect(0,(height*.72),width,height*.3);					// ground: white alpha region
+	pop(); 
+	// bleepity bloopity traffic region
+	renderSquares(
+		width*.34,height*.75,
+		width*.2, height*.25,
+		1,darker,white,darker,cur_frac,unitsOnField,unitSize,spacing
+		);
+	rect(width*.413, height*.55, width*.015, height*.45); 	// intersection: vertical whiteout, ~half screen height
+	rect(0,(height*.98),width,height*.05); 					// crops the bleepity bloopity traffic region *just* before the canvas floor
+	pop();
+	
+	// skyscraper on the left
+	renderSquares(
+		width*.15+(unitSize*.25),height/4,
+		width/8,height,
+		10,darker,white,white,
+		cur_frac,unitsOnField,unitSize*2,spacing*1 // I realised I can make changes to these parameters. This made this buiding waay cooler.
+		); 	
+	renderSquares(
+		width*.15,height/4,
+		width/8,height,
+		50,white,darker,white,cur_frac,unitsOnField,unitSize,spacing
+		);
+
+
+	// where I'm at with the OOP refactor. 
+	let testRegion = new TextureGrid(
+		width/2,height/2, 	// x and y position
+		width/6, height/4,				// region width and height
+		darker, 5, white, darker		// stroke, noise detail level, primary and secondary colour
+	);
+
+	//testRegion.renderRegion(cur_frac,unitsOnField,unitSize,spacing); 
+	// THIS DRAWS IT !! I just had an issue where it wouldn't display, this has me very excited.
+	// Holding off on a full conversion for now due to a performance decrease I noticed.	
 
 }
 
