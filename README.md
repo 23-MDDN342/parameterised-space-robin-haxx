@@ -1,4 +1,4 @@
-![thumbnail](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/thumbnail.png?raw=true)\
+![thumbnail](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/thumbnail.png?raw=true)
 
 **Project One: City of Noise**
 
