@@ -182,8 +182,8 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 		5,darker,darker,white,cur_frac* modifier,unitsOnField,unitSize,spacing
 		);
 	renderSquares(
-		width*.3,height*.6,  												// x and y position
-		width- (width*.25), height*.15, 									// width and height
+		width*.3,height*.6,  														// x and y position
+		width- (width*.25), height*.15, 											// width and height
 		5,white,darker,darker,cur_frac * modifier,unitsOnField,unitSize,spacing		// noise detail level, colours, inherited parameters
 		);		
 	renderSquares(
@@ -200,8 +200,8 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 	rect(width*.1,(height*.72),width,height*.3);			// ground: white alpha region
 	pop(); 
 
-	modifier = phase * 0.5;
 	// bleepity bloopity traffic region
+		modifier = phase * 0.8;
 	renderSquares(
 		width*.34,height*.75,
 		width*.2, height*.25,
@@ -238,6 +238,7 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 	//testRegion.renderRegion(cur_frac,unitsOnField,unitSize,spacing); 
 	// UNCOMMENTING THIS DRAWS IT !! I just had an issue where it wouldn't display, this has me very excited.
 	// Holding off on a full conversion for now due to a performance decrease I noticed.	
+	// So basically, this is a proof of concept for things I can do with this project post-handin.
 
 }
 

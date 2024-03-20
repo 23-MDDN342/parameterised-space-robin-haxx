@@ -1,27 +1,22 @@
+![thumbnail](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/thumbnail.png?raw=true)\
 
+**Project One: City of Noise**
 
-Update: Refactoring! Now I have a function to draw areas of grids, with noise. I want to keep packaging the code into this and have different "styles" e.g. arrangements of shapes that produce different textures, so I can focus on building the ideal composition and vibe.
-Right now I'm looking back through past iterations for what to include here, and frying my brain cleaning up the project file. I also moved some variables into the code.js draw scope.
-!
+For this project I aimed to produce a piece of animation that engages with architectural form, initially driven by the idea of projection mapping visual textures onto sculptural or stage-set installations. \
+My initial visual goal was something that highlighted the relationship between abstract cyber-aesthetics and more organic design.\
+As my process developed, I realised how important it would be to build functions to use as tools to define regions of texture, so a big part of the process was experimenting with what makes the best toolset when writing in code.
+These "textures" are regions defined, split uniformy into components (primarily layered squares and rectangles), then coordinated in movement with either smooth animation or spontaneous noise. As the project went on, these two methods worked more hand-in-hand.
 
+I explored different tech-leaning design styles, starting with darker, strobey stuff inspired by DJ visuals - but moving towards using the tools I built to design the final composition for a Zoom background, I decided on a brighter, futuristic cityscape.\
+I stuck to one colour to interpolate to and from white, finally adding yellow to the palette to complement the sun animation.
 
-
-
-Initial idea statement; revisited..
-
-For this project I aimed to produce a piece of animation that is ready to apply to architectural form via projection mapping, either a blank wall mass of any scale or something more purpose-built such as a stage set or other audio-visual installation.\
-I think I've made a lot of progress in working out how to do this, and the guidance in creating noise has been really helpful. Being able to define a region to split uniformy into components, then coordinate their behaviour with either smooth animation or spontaneous noise, is the key to what I was going for here. 
-I explored a few different ways the grid components could be designed, mostly by layering animated rectangle shapes, sometimes making each component large enough to layer over its neighbours. I coded a tool to move the region by mouse movement, wrote code for a "highlight" layer of elements to follow the mouse around, and finally settled on the idea of functions to create set x,y,width,height regions of different texture compositions.\
-I'm super interested in abstract, cyber-aesthetics and how they contrast against more organic forms, visual elements and movement. 
-I explored different tech-leaning design styles, starting with darker, strobey stuff inspired by DJ visuals - but moving towards using the tools I built to design the final composition for a Zoom background, I decided on a brighter, futuristic cityscape.
-
-I stuck to one colour to interpolate to and from white, and the last thing I am trying to implement is a branching algorithm.
+**Initial sketches:**
 
 ![sketch 1](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/sketch.jpg?raw=true)\
 ![sketch 2](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch2.jpg?raw=true)\
 ![sketch 3](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/sketch3.jpg?raw=true)
 
-inspiration (music + space)
+**inspiration (music + space)**
 
 ![Cityscape](https://github.com/23-MDDN342/parameterised-space-robin-haxx/blob/master/readmeImages/cityscape.png?raw=true)\
 "Cityscape", Earth Liberation Studio
@@ -74,15 +69,3 @@ i will do this too ...\
 -a function for growing, similarly to how I have used recursion before.\
 -I like how this used the space in a "tiled" format, while implementing
 systems for moving parts that interacted to make a varied overall piece.
-
-requirements:\
--consistent rendering at any resolution (scalable) and lends 
- itself to large-format application\
--perfect 24 frame loop and smooth, bug-free performance\
--organised, readable and accessible code standard
- & curated collection of commits. \
--varied use of coded elements and design patterns, creative 
- thought process and execution. unique voice.\
--this document tracks my thought process at every significant step
- and should be able to introduce the work well to a lay-person.\
--open source ethics, always.
