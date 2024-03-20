@@ -52,15 +52,17 @@ function renderSquares(x,y,rWidth,rHeight,noiseDetail,primary,secondary,strokeCl
 function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 
 	let noiseNumber;
-	let darker = 		color("#004237"); 	// monochrome colour to lerp with white.
-	let white = 		color("#ffffff");	// fun idea: switch the HEX out with neon pink
-	let black = 		color("000000");	// I don't actually think this is used any more!
-	let darkerAlpha = 	color(0,100,100,60);
-	let whiteAlpha = 	color(255,255,255,220);
-	let whiteLowAlpha = color(255,255,255,30);
+	const darker = 		color("#004237"); 	// monochrome colour to lerp with white.
+	const white = 		color("#ffffff");	// fun idea: switch the HEX out with neon pink
+	const black = 		color("000000");	// I don't actually think this is used any more!
+	const darkerAlpha = 	color(0,100,100,60);
+	const darkerLowAlpha = 	color(50,180,100,30);
+	const whiteAlpha = 	color(255,255,255,220);
+	const whiteLowAlpha = color(255,255,255,30);
+	const sunAlpha = 	color(255,252,151,160);
 
 	let phase; // used to alternate between cur_frac and its inverse (zero_to_zero)
-	let zero_to_zero = map(cur_frac,0,1,1,0); // uno_reverse_card.jpg
+	const zero_to_zero = map(cur_frac,0,1,1,0); // uno_reverse_card.jpg
 		
 	if(cur_frac < 0.5){
 	phase = cur_frac;	
@@ -85,8 +87,8 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 		
 		noiseDetail(6,.4);
 		// absolutely love this sparkly effect from boosting noise x and y so made sure it scales and implemented
-		let noiseX = x*(width / spacing);
-		let noiseY = y*(height / spacing);
+		const noiseX = x*(width / spacing);
+		const noiseY = y*(height / spacing);
 	
 		noiseColour = getNoiseValue(noiseX, noiseY, cur_frac, "MyNoise", 0, 1, 50 );
 
@@ -148,7 +150,7 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 	
 	push();
 	noFill();
-	stroke(darkerAlpha);
+	stroke(darkerLowAlpha);
 	strokeWeight(unitSize*.1);
 	curve(width*.1,height*6,
 		width*.2,height*.7,
@@ -159,8 +161,9 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 	// sun. no day/night cycle here.
 	push();
 	stroke(lerpColor(white, darker, noiseColour));
-	fill(white);
-	strokeWeight(unitSize*.05);
+	fill(sunAlpha);
+	noStroke();
+	//strokeWeight(unitSize*.2);
 	circle(
 		// here I use an exponential multiplier on cur_frac for curved velocity 
 		// (direction and speed changes at a nonlinear rate)

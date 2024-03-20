@@ -4,7 +4,7 @@ const debugZoomBackground = "#555588"
 const debugZoomScale = 0.5;
 
 // this can be modified after we discuss in lecture
-const buffersPerFrame = 1;
+const buffersPerFrame = 10;
 
 
 
@@ -21,10 +21,6 @@ let darker;
 let white; 
 
 let testRegion;
-
-
-
-
 
 // *note: canvasWidth and canvasHeight will be defined before this script runs)
 
@@ -62,11 +58,11 @@ function draw () {
   if (cur_frame >= animation_max_frames) {
     cur_frame = 0;
   }
-  let cur_frac = map(cur_frame, 0, animation_max_frames, 0, 1);
+  const cur_frac = map(cur_frame, 0, animation_max_frames, 0, 1);
 
-  let unitsOnField = 65;//THIS COULD DO WITH A MORE ACCESSIBLE SCALABLE VARIABLE IN DRAW_ONE_FRAME
-  let unitSize = width/unitsOnField;
-  let spacing = width / unitsOnField ;
+  const unitsOnField = 65;//THIS 'ERE COULD DO WITH A MORE ACCESSIBLE SCALABLE VARIABLE IN DRAW_ONE_FRAME
+  const unitSize = width/unitsOnField;
+  const spacing = width / unitsOnField ;
 
 
 
