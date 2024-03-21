@@ -1,54 +1,5 @@
 
-	// PROJECT 1 CODE EVOLUTION, PHASE 2: NOISE- RENDERING FUNCTION
-	// I know you're seeing phase 2 first, but this is how scope works.
-	// A function that packages up my main means of drawing regions of animated elements,
-	// and provides functionality whenever it is deployed.
-	// Just look at all those variables.
-	// There are a few ways of writing variants of functions, here I just have one.
-	// This is mainly because I am working on creating a class for this functionality.
-	// Also because I need to get something on the canvas.
-	
-function renderSquares(x,y,rWidth,rHeight,noiseDetail,primary,secondary,strokeClr,cur_frac,unitsOnField,unitSize,spacing, modifier ){
-
-	zero_to_zero = map(cur_frac,0,1,1,0); // minor fumble: a few things, like this, have to be declared in 2 places
-
-	push(); 	// very very very necessary to put this all in a push/pop.
-	translate(x,y-unitSize*.375);
-	stroke(strokeClr);
-	strokeWeight(unitSize*0.025);
-	for(let i = 0; i < (rWidth/spacing); i++){
-		for (let j = 0; j < (rHeight / spacing); j++){
-
-			let noiseGen = getNoiseValue(i,j,cur_frac,"fNoise",0,.8,noiseDetail);
-			fill(lerpColor(primary, secondary, noiseGen));
-
-			// "phase" changes when condition is met. phases explained where variable is defined in draw_one_frame.
-			if(cur_frac < 0.5){
-			phase = cur_frac;	
-			} else{
-			phase = zero_to_zero;
-			}
-
-			push();
-			noStroke();
-			fill(white);
-			rect(
-				spacing*i,(spacing*j),  
-				(unitSize*2*phase)+(unitSize*.5), unitSize*.4*phase
-				);
-			pop();
-
-			rect(
-				spacing*i,spacing*j, 
-				unitSize*.5, (unitSize*2*noiseGen)+unitSize
-				);
-
-		}
-	}
-	pop(); // cannot stress enough how necessary this is.
-}
-
-
+//main draw loop function
 function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 
 	let noiseNumber;
@@ -57,9 +8,10 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 	const black = 		color("000000");	// I don't actually think this is used any more!
 	const darkerAlpha = 	color(0,100,100,60);
 	const darkerLowAlpha = 	color(50,180,100,30);
-	const whiteAlpha = 	color(255,255,255,220);
-	const whiteLowAlpha = color(255,255,255,30);
-	const sunAlpha = 	color(255,252,151,160);
+	const whiteAlpha = 		color(255,255,255,220);
+	const whiteMidAlpha = 	color(255,255,255,180);
+	const whiteLowAlpha = 	color(255,255,255,30);
+	const sunAlpha = 		color(255,252,151,160);
 
 	let phase; // used to alternate between cur_frac and its inverse (zero_to_zero)
 	const zero_to_zero = map(cur_frac,0,1,1,0); // uno_reverse_card.jpg
@@ -104,7 +56,8 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 			//OLD IDEAS: 
 			//rect(spacing*x, spacing*y, unitSize*2, unitSize/8); // very cool horizontal motion lines
 			 
-			// DRAWING BASED ON MOUSE POSITION
+			// DRAWING BASED ON MOUSE POSITION 
+			// (I left this on. It only affects performance if mouse is on screen.)
 			if (
 				spacing*x > (mouseX + width * .01) && 
 				spacing*x < (mouseX + width*.1) &&
@@ -129,7 +82,10 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 		// background shape whiteout. 
 		// only current scalability issue in the project; alpha strength changes with resolution
 		// this is because of how I've overlaid it with the grid loop. 
-		// I like the gradient it creates in any case, so I'm leaving it as is :)
+		// fun fact, commenting this out improves runtime performance by about 30%.
+		// another fun fact - the only other way I got this much of a performance boost was commenting out everything post line 105. 
+		// I think it's because js doesn't like overlaying a lot of alpha - my phenakistascope had this issue too.
+		// I like the subtle gradient it creates in any case, so I'm leaving it as is :)
 		 push();
 		 fill(whiteLowAlpha);
 		 scale(1.1);
@@ -143,11 +99,12 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 		 pop();
 
 		// PLACEHOLDER EYE LIVES!!
-		//ellipse(width/2,height/2,width/2.4,height/3.5);
-		//image(img,width/4,height/4,width/2,height/2);
+		// ellipse(width/2,height/2,width/2.4,height/3.5);
+		// image(img,width/4,height/4,width/2,height/2);
 
 	}
-	
+
+	//	sun path
 	push();
 	noFill();
 	stroke(darkerLowAlpha);
@@ -158,7 +115,7 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 		width*.1,height);
 	pop();
 
-	// sun. no day/night cycle here.
+	// 	sun. no day/night cycle here.
 	push();
 	stroke(lerpColor(white, darker, noiseColour));
 	fill(sunAlpha);
@@ -172,32 +129,40 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 		width*.07+(width*phase*.1)); 				// radius
 	pop();
 
-	let modifier = phase; // my favourite variable in this whole project.
+
+	//  PROJECT 1 PHASE 2: renderSquares()
+	//	See the function definition below the draw loop for more info
+
+	let modifier = phase; // my favourite variable in this whole project. 
+	// 	for multiplying cur_frac by itself (and making sure the multiplication follows the 0-1-0 phase) 
 	
-	// horizontal skyline, noise detail of 5. 2 looks quite cool too.
-	// first, this backing shadow layer is drawn to add depth.
+	// 	horizontal skyline, noise detail of 5. 2 looks quite cool too.
+	// 	first, this backing shadow layer is drawn to add depth.
 	renderSquares(
 		(width*.3)+(unitSize*.5),height*.6,
-		width- width*.25, height*.15,
+		width*.56, height*.15,
 		5,darker,darker,white,cur_frac* modifier,unitsOnField,unitSize,spacing
 		);
+	//  this layer is for the sides of the buildings and some of the balconies
 	renderSquares(
 		width*.3,height*.6,  														// x and y position
-		width- (width*.25), height*.15, 											// width and height
+		width*.75, height*.15, 														// width and height
 		5,white,darker,darker,cur_frac * modifier,unitsOnField,unitSize,spacing		// noise detail level, colours, inherited parameters
-		);		
+		);	
+	//  and this one is for the front facade and the rest of the balconies.	
 	renderSquares(
 		(width*.3)-(unitSize/4),height*.6,
-		width- (width*.25), height*.15,
+		width*.55, height*.15,
 		5,white,white,darker,cur_frac * modifier,unitsOnField,unitSize,spacing
 		);
+		
 	push();
 	rectMode(CORNER);
 	fill(white);
 	rect(0,(height*.72),width,height*.055); 				// skyline: whiteout
 	push();
-	fill(whiteAlpha);
-	rect(width*.1,(height*.72),width,height*.3);			// ground: white alpha region
+	fill(whiteMidAlpha);
+	rect(width*.1,(height*.72),width*.8,height*.3);			// ground: white alpha region
 	pop(); 
 
 	// bleepity bloopity traffic region
@@ -208,7 +173,7 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 		1,darker,white,darker,cur_frac*modifier,unitsOnField,unitSize,spacing
 		);
 	rect(width*.413, height*.55, width*.017, height*.45); 	// intersection: vertical whiteout, ~half screen height
-	rect(0,(height*.98),width,height*.05); 					// crops the bleepity bloopity traffic region *just* before the canvas floor
+	rect(0,(height*.975),width,height*.05); 					// crops the bleepity bloopity traffic region *just* before the canvas floor
 	pop();
 	
 	// skyscraper on the left
@@ -222,23 +187,75 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 		modifier = phase * 1.6;
 	renderSquares(
 		width*.15,height*.25,
-		width/8,height,
+		width*.125,height*.7,
 		100,white,darker,white,
 		cur_frac * modifier,unitsOnField,unitSize,spacing
 		);
+	push();
+	fill(white);
+	rect(width*.215,height*.95,width*.148,unitSize*.5); 		// white dividing line at ground level of skyscraper
+	pop();
 
 
-	// where I'm at with the OOP refactor. 
-	let testRegion = new TextureGrid(
-		width*.25,height*.25, 	// x and y position
-		width*.125, height*.25,				// region width and height
-		darker, 5, white, darker		// stroke, noise detail level, primary and secondary colour
-	);
+	//where I'm at with the OOP refactor. 
+	// let testRegion = new TextureGrid(
+	// 	width*.25,height*.25, 	// x and y position
+	// 	width*.125, height*.25,				// region width and height
+	// 	darker, 5, white, darker		// stroke, noise detail level, primary and secondary colour
+	// );
 
 	//testRegion.renderRegion(cur_frac,unitsOnField,unitSize,spacing); 
 	// UNCOMMENTING THIS DRAWS IT !! I just had an issue where it wouldn't display, this has me very excited.
-	// Holding off on a full conversion for now due to a performance decrease I noticed.	
-	// So basically, this is a proof of concept for things I can do with this project post-handin.
+	// Holding off on a full conversion for now due to a performance decrease I noticed,
+	// and because it will be quite a lot of work.	
+	// Basically, this is a proof of concept for things I can do with this project post-handin.
 
 }
 
+	// PROJECT 1 CODE EVOLUTION, PHASE 2: NOISE- RENDERING FUNCTION
+	
+	// A function that packages up my main means of drawing regions of animated elements,
+	// and provides functionality whenever it is deployed.
+	// Just look at all those parameters.
+	// There are a few ways of writing variants of functions, here I just have one.
+	// This was because I wanted to focus on making the final composition, and attempting an OOP refactor.
+	
+function renderSquares(x,y,rWidth,rHeight,noiseDetail,primary,secondary,strokeClr,cur_frac,unitsOnField,unitSize,spacing, modifier ){
+
+	zero_to_zero = map(cur_frac,0,1,1,0); // minor fumble: a few things, like this, have to be declared in 2 places
+	
+	push(); 	// very very very necessary to put this all in a push/pop.
+	translate(x,y-unitSize*.375);
+	stroke(strokeClr);
+	strokeWeight(unitSize*0.025);
+	for(let i = 0; i < (rWidth/spacing); i++){
+		for (let j = 0; j < (rHeight / spacing); j++){
+
+			let noiseGen = getNoiseValue(i,j,cur_frac,"fNoise",0,.8,noiseDetail);
+			fill(lerpColor(primary, secondary, noiseGen));
+
+			// "phase" changes when condition is met. phases explained where variable is defined in draw_one_frame.
+			if(cur_frac < 0.5){
+			phase = cur_frac;	
+			} else{
+			phase = zero_to_zero;
+			}
+
+			push();
+			noStroke();
+			fill(white);
+			rect(
+				spacing*i,(spacing*j),  
+				(unitSize*2*phase)+(unitSize*.5), unitSize*.4*phase
+				);
+			pop();
+
+			rect(
+				spacing*i,spacing*j, 
+				unitSize*.5, (unitSize*2*noiseGen)+unitSize
+				);
+
+		}
+	}
+	pop(); // cannot stress enough how necessary this is.
+}
