@@ -17,7 +17,7 @@ let img;
 
 let darker; 
 let white; 
-
+let noiseColour;
 let testRegion;
 let noiseGen;
 
@@ -42,6 +42,10 @@ function draw () {
   }
   let cur_frac = map(cur_frame, 0, animation_max_frames, 0, 1);
 
+  const unitsOnField = 65;//THIS 'ERE COULD DO WITH A MORE ACCESSIBLE SCALABLE VARIABLE IN DRAW_ONE_FRAME
+  const unitSize = width/unitsOnField;
+  const spacing = width / unitsOnField ;
+
   background(debugZoomBackground);
 
   push();
@@ -52,7 +56,7 @@ function draw () {
     translate(0.5 * -width, 0.5 * -height);    
   }
 
-  draw_one_frame(cur_frac);
+  draw_one_frame(cur_frac,unitsOnField,unitSize,spacing);
 
   pop();
 
