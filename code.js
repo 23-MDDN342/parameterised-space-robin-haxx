@@ -15,11 +15,13 @@ let debugView = false;
 let stickFrame = 0;
 let img;
 
-let darker; 
-let white; 
+
+
+
 let noiseColour;
 let testRegion;
 let noiseGen;
+let zero_to_zero;
 
 // *note: canvasWidth and canvasHeight will be defined before this script runs)
 
@@ -42,9 +44,11 @@ function draw () {
   }
   let cur_frac = map(cur_frame, 0, animation_max_frames, 0, 1);
 
-  const unitsOnField = 65;//THIS 'ERE COULD DO WITH A MORE ACCESSIBLE SCALABLE VARIABLE IN DRAW_ONE_FRAME
+  const unitsOnField = 65;
   const unitSize = width/unitsOnField;
   const spacing = width / unitsOnField ;
+
+
 
   background(debugZoomBackground);
 
@@ -107,12 +111,19 @@ function keyTyped() {
 
 
 class TextureGrid {
-  constructor(x,y,w,h,strokeClr,noiseDetail,primary,secondary,cur_frac,unitsOnField,unitSize,spacing) {
+  constructor(x,y,w,h,
+    lowerSqW,lowerSqH,higherSqW,higherSqH,
+    strokeClr,noiseDetail,primary,secondary,
+    cur_frac,unitsOnField,unitSize,spacing) {
 
       this.x = x;
       this.y = y;
       this.w = w;
       this.h = h;
+      this.lowerSqW = lowerSqW;
+      this.lowerSqH = lowerSqH;
+      this.higherSqW = higherSqW;
+      this.higherSqH = higherSqH;
       this.strokeClr = strokeClr;
       this.noiseDetail = noiseDetail;
       this.primary = primary;
@@ -123,7 +134,7 @@ class TextureGrid {
   noise(cur_frac){
   
       this.primaryNoise = getNoiseValue(this.x,this.y,cur_frac,"pNoise",0,1,pNoiseDetail);
-      this.primaryNoise = getNoiseValue(this.x,this.y,cur_frac,"sNoise",0,1,sNoiseDetail);
+      this.secondaryNoise = getNoiseValue(this.x,this.y,cur_frac,"sNoise",0,1,sNoiseDetail);
 
   // potentially able to change on the fly with code such as:
   // let chaoticNoise = getNoiseValue(this.x,this.y,cur_frac,"cNoise",0,1,2);
@@ -152,20 +163,20 @@ class TextureGrid {
                   push();
                   noStroke();
                   fill(255);
-                  rect(spacing*i,(spacing*j)-(unitSize/4),  (unitSize*4*cur_frac)-(unitSize/2), unitSize/2);
+                  rect(spacing*i,(spacing*j)-(unitSize/4),  cur_frac*this.lowerSqW, cur_frac*this.lowerSqH);
                   pop();
-                  rect(spacing*i,spacing*j, unitSize/2, (unitSize*2*noiseGen)+unitSize);
+                  rect(spacing*i,spacing*j,  cur_frac*this.higherSqW, cur_frac*this.higherSqH);
               }
               else
               {
                   push();
                   noStroke();
                   fill(255);
-                  rect(spacing*i,(spacing*j)-(unitSize/4), (unitSize*4*zero_to_zero)-(unitSize/2), unitSize/2);
+                  rect(spacing*i,(spacing*j)-(unitSize/4), zero_to_zero*this.sqW, zero_to_zero*this.sqH);
                   pop();
                   push();
-                  //fill(255);
-                  rect(spacing*i,spacing*j, unitSize/2, (unitSize*2*noiseGen)+unitSize);
+                  
+                  rect(spacing*i,spacing*j, zero_to_zero*this.sqW, zero_to_zero*this.sqH);
                   pop();   
               }
           

@@ -16,7 +16,7 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 
 
 	let phase; // used to alternate between cur_frac and its inverse (zero_to_zero)
-	const zero_to_zero = map(cur_frac,0,1,1,0); // uno_reverse_card.jpg
+	let zero_to_zero = map(cur_frac,0,1,1,0); // uno_reverse_card.jpg
 		
 	if(cur_frac < 0.5){
 	phase = cur_frac;	
@@ -79,36 +79,45 @@ function draw_one_frame(cur_frac,unitsOnField,unitSize,spacing) {
 	// 	for multiplying cur_frac by itself (and making sure the multiplication follows the 0-1-0 phase) 
 
 	push();
-	rectMode(CORNER);
+	// rectMode(CORNER);
 	fill(white);
 	rect(0,(height*.72),width,height*.055); 				// skyline: whiteout
-	push();
-	fill(whiteMidAlpha);
-	rect(width*.1,(height*.72),width*.8,height*.3);			// ground: white alpha region
-	pop(); 
+	// push();
+	// fill(whiteMidAlpha);
+	// rect(width*.1,(height*.72),width*.8,height*.3);			// ground: white alpha region
+	// pop(); 
 
 	// bleepity bloopity traffic region
 		modifier = phase * 0.8;
 
 		// what I need to fix before moving on: why does deleating this break it?
-	renderSquares(
-		width*.34,height*.75,
-		width*.2, height*.25,
-		1,darker,white,darker,cur_frac*modifier,unitsOnField,unitSize,spacing
-		);
+	// renderSquares(
+	// 	width*.34,height*.75,
+	// 	width*.2, height*.25,
+	// 	1,darker,white,darker,cur_frac*modifier,unitsOnField,unitSize,spacing
+	// 	);
 
-	pop();
+	// pop();
 
 	//where I'm at with the OOP refactor. 
 	let testRegion = new TextureGrid(
 		width*.25,height*.25, 	// x and y position
 		width*.125, height*.25,				// region width and height
+		unitSize, unitSize,
+		unitSize*.25,unitSize*.5,
 		darker, 5, white, darker		// stroke, noise detail level, primary and secondary colour
 	);
 
 	testRegion.renderRegion(cur_frac,unitsOnField,unitSize,spacing); 
+
+
+
+
+
 }
-function renderSquares(x,y,rWidth,rHeight,noiseDetail,primary,secondary,strokeClr,cur_frac,unitsOnField,unitSize,spacing, modifier ){
+function renderSquares(
+	x,y,rWidth,rHeight,
+	noiseDetail,primary,secondary,strokeClr,cur_frac,unitsOnField,unitSize,spacing, modifier ){
 
 	zero_to_zero = map(cur_frac,0,1,1,0); 
 	
